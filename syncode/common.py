@@ -36,8 +36,6 @@ def load_model(model_name, device, quantize):
             model = AutoModelForCausalLM.from_pretrained('bigcode/tiny_starcoder_py').to(device)
         elif model_name == 'test-instruct':
             model = AutoModelForCausalLM.from_pretrained("rahuldshetty/tiny-starcoder-instruct")
-        elif model_name == "mistralai/Codestral-22B-v0.1":
-            model = AutoModelForCausalLM.from_pretrained(model_name, load_in_4bit=True, cache_dir=HF_CACHE, token=HF_ACCESS_TOKEN, trust_remote_code=True).eval()
         else:
             if (quantize):
                 model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16, cache_dir=HF_CACHE, token=HF_ACCESS_TOKEN, trust_remote_code=True).eval().to(device)
